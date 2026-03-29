@@ -1,4 +1,4 @@
-# 🎮 Steam Game Recommender System
+# Steam Game Recommender System
 
 <p align="center">
   <b>A hybrid recommendation system built with Python</b><br>
@@ -7,38 +7,38 @@
 
 ---
 
-## 🚀 Overview
+## Overview
 
 This project is a **hybrid game recommender system** that suggests games based on:
 
-* 🎯 User-selected **genres**
-* 🎮 Games the user already likes
-* 🔥 Game **popularity and ratings**
+*  User-selected **genres**
+*  Games the user already likes
+*  Game **popularity and ratings**
 
 It combines multiple techniques to provide **smart, diverse, and non-repetitive recommendations**.
 
 ---
 
-## ✨ Features
+##  Features
 
-* ✅ Multi-genre input (e.g., `action, open_world`)
-* ✅ “Games like X” recommendation
-* ✅ Popularity-based ranking system
-* ✅ Non-repetitive suggestions (session memory)
-* ✅ Dynamic results (randomized top picks)
-* ✅ Clean CLI-based user interface
+*  Multi-genre input (e.g., `action, open_world`)
+*  “Games like X” recommendation
+*  Popularity-based ranking system
+*  Non-repetitive suggestions (session memory)
+*  Dynamic results (randomized top picks)
+*  Clean CLI-based user interface
 
 ---
 
-## 🧠 How It Works
+## How It Works
 
-### 🔹 1. Genre-Based Filtering
+### 1. Genre-Based Filtering
 
 * Matches game tags with predefined genre keywords
 * Supports multiple genres
 * More matching genres = higher score
 
-### 🔹 2. Popularity Ranking
+### 2. Popularity Ranking
 
 Games are ranked using:
 
@@ -48,7 +48,7 @@ score = positive - negative + (owners // 1000)
 
 ---
 
-### 🔹 3. Similarity Recommendation
+### 3. Similarity Recommendation
 
 * Uses **Jaccard Similarity**
 * Compares tags between games
@@ -56,7 +56,7 @@ score = positive - negative + (owners // 1000)
 
 ---
 
-### 🔹 4. Smart Diversity System
+### 4. Smart Diversity System
 
 * Selects from **top 50 results**
 * Uses randomness to keep recommendations fresh
@@ -64,7 +64,7 @@ score = positive - negative + (owners // 1000)
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose                      |
 | ---------- | ---------------------------- |
@@ -86,20 +86,20 @@ score = positive - negative + (owners // 1000)
 * `negative`
 * `owners`
 
-> ⚠️ Make sure the dataset is in the same folder as `main.py`
+>  Make sure the dataset is in the same folder as `main.py`
 
 ---
 
-## ▶️ Getting Started
+## Getting Started
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/steam-recommender.git
 cd steam-recommender
 ```
 
-### 2️⃣ Add Dataset
+### Add Dataset
 
 Place the dataset file:
 
@@ -107,13 +107,13 @@ Place the dataset file:
 steam_games_large.csv
 ```
 
-### 3️⃣ Run the Project
+### Run the Project
 
 ```bash
 import csv
 import random
 
-# 🎯 Define genres
+# Define genres
 GENRES = {
     "fps": ["fps", "shooter", "gun", "first person"],
     "horror": ["horror", "scary", "fear", "evil", "ghost"],
@@ -131,9 +131,9 @@ GENRES = {
 }
 
 games = []
-seen_games = set()  # 🔥 Prevent repetition
+seen_games = set()  # Prevent repetition
 
-# 🎯 Popularity score
+# Popularity score
 def get_popularity_score(row):
     try:
         positive = int(row.get("positive", 0))
@@ -150,7 +150,7 @@ def get_popularity_score(row):
         return 0
 
 
-# 🎯 Load dataset
+# Load dataset
 with open("steam_games_large.csv", "r", encoding="utf-8") as file:
     reader = csv.DictReader(file)
 
@@ -165,10 +165,10 @@ with open("steam_games_large.csv", "r", encoding="utf-8") as file:
                 "score": get_popularity_score(row)
             })
 
-print(f"✅ Loaded {len(games)} games\n")
+print(f" Loaded {len(games)} games\n")
 
 
-# 🎯 Detect genres
+# Detect genres
 def detect_game_genres(game):
     detected = []
 
@@ -181,7 +181,7 @@ def detect_game_genres(game):
     return detected
 
 
-# 🎯 Genre-based recommender (NO REPEAT + VARIETY)
+# Genre-based recommender (NO REPEAT + VARIETY)
 def recommend_by_genres(user_genres, top_n=7):
     results = []
 
@@ -195,7 +195,7 @@ def recommend_by_genres(user_genres, top_n=7):
 
     results.sort(key=lambda x: x[0], reverse=True)
 
-    # 🎯 Top pool for variety
+    # Top pool for variety
     top_pool = [game for _, game in results[:50]]
 
     # Remove seen games
@@ -213,7 +213,7 @@ def recommend_by_genres(user_genres, top_n=7):
     return selected
 
 
-# 🎯 Similar games recommender (NO REPEAT + VARIETY)
+# Similar games recommender (NO REPEAT + VARIETY)
 def recommend_similar_games(game_name, top_n=7):
     target_game = None
 
@@ -247,7 +247,7 @@ def recommend_similar_games(game_name, top_n=7):
 
     similarities.sort(key=lambda x: x[0], reverse=True)
 
-    # 🎯 Top pool
+    # Top pool
     top_pool = [game for _, game in similarities[:50]]
 
     filtered = [g for g in top_pool if g["name"] not in seen_games]
@@ -264,68 +264,68 @@ def recommend_similar_games(game_name, top_n=7):
     return selected
 
 
-# 🎮 MAIN UI
+# MAIN UI
 def main():
-    print("🎮 ADVANCED Steam Recommender System\n")
+    print("Game Recommender System\n")
 
     while True:
         print("\nChoose what you want to do:\n")
-        print("1️⃣ Recommend by Genre")
-        print("2️⃣ Recommend Games Like X")
-        print("3️⃣ Exit")
+        print("1.Recommend by Genre")
+        print("2️.Recommend Games Like X")
+        print("3️.Exit")
 
-        choice = input("\n👉 Enter choice (1/2/3): ").strip()
+        choice = input("\nEnter choice (1/2/3): ").strip()
 
-        # 🎯 GENRE
+        # GENRE
         if choice == "1":
             print("\nAvailable genres:\n")
             for g in GENRES:
-                print(f"👉 {g}")
+                print(f" {g}")
 
-            user_input = input("\n👉 Enter genres (comma-separated): ").lower()
+            user_input = input("\nEnter genres (comma-separated): ").lower()
             user_genres = [g.strip() for g in user_input.split(",")]
 
             valid_genres = [g for g in user_genres if g in GENRES]
 
             if not valid_genres:
-                print("❌ No valid genres entered")
+                print("No valid genres entered")
                 continue
 
             results = recommend_by_genres(valid_genres)
 
             if not results:
-                print("❌ No games found")
+                print("No games found")
                 continue
 
-            print("\n🔥 Recommended Games:\n")
+            print("\nRecommended Games:\n")
             for game in results:
-                print(f"🎯 {game['name']}")
+                print(f"{game['name']}")
 
             print("\n" + "-"*40)
 
-        # 🎯 SIMILAR
+        # SIMILAR
         elif choice == "2":
-            game_name = input("\n🎮 Enter a game you like: ")
+            game_name = input("\nEnter a game you like: ")
 
             results = recommend_similar_games(game_name)
 
             if not results:
-                print("❌ Game not found or no similar games")
+                print("Game not found or no similar games")
                 continue
 
-            print("\n🔥 Similar Games:\n")
+            print("\nSimilar Games:\n")
             for game in results:
-                print(f"🎯 {game['name']}")
+                print(f"{game['name']}")
 
             print("\n" + "-"*40)
 
-        # 🎯 EXIT
+        # EXIT
         elif choice == "3":
-            print("👋 Exiting...")
+            print("Exiting...")
             break
 
         else:
-            print("❌ Invalid choice. Try again.")
+            print("Invalid choice. Try again.")
 
 
 if __name__ == "__main__":
@@ -334,12 +334,12 @@ if __name__ == "__main__":
 
 ---
 
-## 💻 Usage
+## Usage
 
 ```
-1️⃣ Recommend by Genre
-2️⃣ Recommend Games Like X
-3️⃣ Exit
+1️. Recommend by Genre
+2️. Recommend Games Like X
+3️. Exit
 ```
 
 ### Example:
@@ -361,15 +361,15 @@ action, open_world
 ```
 ---
 
-## ⚠️ Limitations
+## Limitations
 
-* No advanced ML (yet)
+* No advanced ML 
 * Depends on dataset quality
 * Keyword-based genre detection
 
 ---
 
-## 🏁 Conclusion
+## Conclusion
 
 This project demonstrates a **real-world recommender system approach** using:
 

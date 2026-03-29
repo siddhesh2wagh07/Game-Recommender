@@ -353,9 +353,9 @@ action, open_world
 **Output:**
 
 ```
-🎯 GTA V
-🎯 Red Dead Redemption 2
-🎯 Cyberpunk 2077
+GTA V
+Red Dead Redemption 2
+Cyberpunk 2077
 ...
 
 ```

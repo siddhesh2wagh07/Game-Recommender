@@ -74,7 +74,7 @@ score = positive - negative + (owners // 1000)
 
 ---
 
-## 📂 Dataset
+## Dataset
 
 **File:** `steam_games_large.csv`
 
